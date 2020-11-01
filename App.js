@@ -1,13 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+
+import Navigation from './src/navigation/Navigation';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start wokjabsdkjasbdkajrking on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer >
+      <Navigation />
+      <StatusBar style="auto" backgroundColor="#6FDA45"/>
+    </NavigationContainer>
   );
 }
 

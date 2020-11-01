@@ -17,12 +17,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.joyrush",
+      "config": {
+        "googleMapsApiKey": "AIzaSyDHLb4yDYCWrE2hy04nUFfWxSIfGY8f2W8"
+      }
     },
     "android": {
+      "package": "com.joyrush",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDHLb4yDYCWrE2hy04nUFfWxSIfGY8f2W8"
+        }
       }
     },
     "web": {
