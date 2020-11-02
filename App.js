@@ -5,11 +5,13 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import Navigation from './src/navigation/Navigation';
 
+import { primaryColor } from './src/theme/colors';
+
 export default function App() {
   return (
-    <NavigationContainer >
+    <NavigationContainer>
       <Navigation />
-      <StatusBar style="auto" backgroundColor="#6FDA45"/>
+      <StatusBar style="auto" backgroundColor={primaryColor} />
     </NavigationContainer>
   );
 }

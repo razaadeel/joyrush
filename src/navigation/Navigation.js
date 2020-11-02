@@ -1,9 +1,11 @@
 import React from 'react'
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import HomeScreen from '../screens/HomeScreen';
 import { MaterialIcons } from '@expo/vector-icons';
+
+import HomeScreen from '../screens/HomeScreen';
+import PickAddressScreen from '../screens/PickAddressScreen';
 
 let Stack = createStackNavigator();
 
@@ -28,11 +30,23 @@ const Navigation = () => {
                             </TouchableOpacity>
                         ),
                         headerRight: () => (
-                            <TouchableOpacity style={{ marginRight: 20, backgroundColor: 'white', borderRadius: 100, padding: 2 }}>
+                            <TouchableOpacity style={styles.rigntIcon}>
                                 <MaterialIcons name="gps-fixed" size={25} color="black" />
                             </TouchableOpacity>
                         ),
                         headerTransparent: true,
+                    }}
+                />
+                <Stack.Screen
+                    name="Address"
+                    component={PickAddressScreen}
+                    options={{
+                        title: 'Set Address',
+                        headerStyle: {
+                            backgroundColor: 'white',
+                            elevation: 0
+                        },
+                        headerTintColor: 'black',
                     }}
                 />
             </Stack.Navigator>
@@ -51,7 +65,15 @@ const Navigation = () => {
     )
 }
 
-
+let styles = StyleSheet.create({
+    rigntIcon: {
+        marginRight: 20,
+        backgroundColor: 'white',
+        borderRadius: 100,
+        padding: 2,
+        elevation: 2,
+    }
+})
 
 
 export default Navigation;
