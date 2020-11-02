@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "primaryColor":"#6FDA45",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

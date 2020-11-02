@@ -6,6 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import HomeScreen from '../screens/HomeScreen';
 import PickAddressScreen from '../screens/PickAddressScreen';
+import DeliveryDetailsScreen from '../screens/DeliveryDetailsScreen';
 
 let Stack = createStackNavigator();
 
@@ -42,6 +43,18 @@ const Navigation = () => {
                     component={PickAddressScreen}
                     options={{
                         title: 'Set Address',
+                        headerStyle: {
+                            backgroundColor: 'white',
+                            elevation: 0
+                        },
+                        headerTintColor: 'black',
+                    }}
+                />
+                <Stack.Screen
+                    name="DeliveryDetails"
+                    component={DeliveryDetailsScreen}
+                    options={{
+                        title: '',
                         headerStyle: {
                             backgroundColor: 'white',
                             elevation: 0

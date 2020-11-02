@@ -4,9 +4,11 @@ import {
     View, TextInput
 } from 'react-native';
 
-import { primaryColor } from '../theme/colors';
+import Button from '../utils/Button';
 
-const PickAddressScreen = () => {
+import { primaryColor, lightgray } from '../theme/colors';
+
+const PickAddressScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.mainView}>
@@ -25,6 +27,11 @@ const PickAddressScreen = () => {
                     />
                 </View>
             </View>
+            <Button
+                onPress={() => navigation.navigate('DeliveryDetails')}
+                title='Next'
+                marginTop='auto'
+            />
         </View>
     )
 }
@@ -33,6 +40,7 @@ const PickAddressScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingBottom: 10
     },
     mainView: {
         paddingVertical: 10,
@@ -45,7 +53,7 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     input: {
-        backgroundColor: '#F0F5F8',
+        backgroundColor: lightgray,
         flex: 1,
         marginLeft: 10,
         paddingLeft: 15,

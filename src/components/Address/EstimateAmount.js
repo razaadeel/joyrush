@@ -1,10 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const EstimateAmount = () => {
+const EstimateAmount = ({ }) => {
     return (
         <View style={styles.container}>
-            <Text>asdasd</Text>
+            <Text style={{ ...styles.text, fontSize: 22 }}>Estimate:</Text>
+            <Text style={{ ...styles.text, fontSize: 30 }}>KES 4235.67</Text>
         </View>
     )
 }
@@ -12,7 +13,12 @@ const EstimateAmount = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center'
+    },
+    text: {
+        color: 'gray'
     }
 });
 
