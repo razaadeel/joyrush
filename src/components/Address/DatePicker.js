@@ -1,60 +1,44 @@
 import React from 'react';
-import {
-    StyleSheet, Text,
-    View, TouchableOpacity,
-    Button
-} from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { lightgray, primaryColor } from '../../theme/colors';
 
 const DatePicker = ({ name, onChange }) => {
+    let [date, setDate] = React.useState(new Date());
+    let [show, setShow] = React.useState(false);
 
-    const [date, setDate] = React.useState(new Date());
-    const [mode, setMode] = React.useState('date');
-    const [show, setShow] = React.useState(false);
-
-    const onChangeDate = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        onChange(name, selectedDate);
-        setDate(currentDate);
-    };
-
-    const showMode = (currentMode) => {
+    const showDatePicker = () => {
         setShow(true);
-        setMode(currentMode);
     };
 
-    const showDatepicker = () => {
-        showMode('date');
+    const hideDatePicker = () => {
+        setShow(false);
+    };
+
+    const handleConfirm = (date) => {
+        setDate(date);
+        hideDatePicker();
     };
 
     return (
         <TouchableOpacity
-            onPress={showDatepicker}
+            onPress={showDatePicker}
             activeOpacity={1}
             style={styles.container}>
             <Text style={styles.text}>Pick a delivery data and time</Text>
-            <MaterialIcons name='perm-contact-calendar' size={30} />
-            {
-                show &&
-                <DateTimePicker
-                    testID="dateTimePicker"
-                    value={date}
-                    mode={mode}
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChangeDate}
-                    minimumDate={new Date()}
-                    style={{ backgroundColor: 'red' }}
-                />
-            }
+            <MaterialIcons name="perm-contact-calendar" size={30} />
+            <DateTimePickerModal
+                isVisible={show}
+                mode="date"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+                minimumDate={new Date()}
+            />
         </TouchableOpacity>
-    )
-}
-
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -65,12 +49,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 10,
         alignItems: 'center',
-        paddingVertical: 5
+        paddingVertical: 5,
     },
     text: {
         color: 'gray',
-        fontSize: 16
-    }
+        fontSize: 16,
+    },
 });
 
 export default DatePicker;
