@@ -7,6 +7,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import PickAddressScreen from '../screens/PickAddressScreen';
 import DeliveryDetailsScreen from '../screens/DeliveryDetailsScreen';
+import CarTypeScreen from '../screens/CarTypeScreen';
+import PaymentMethodScreen from '../screens/PaymentMethodScreen';
+import { primaryColor } from '../theme/colors';
 
 let Stack = createStackNavigator();
 
@@ -60,6 +63,41 @@ const Navigation = () => {
                             elevation: 0
                         },
                         headerTintColor: 'black',
+                    }}
+                />
+                <Stack.Screen
+                    name="CarType"
+                    component={CarTypeScreen}
+                    options={{
+                        title: '',
+                        headerStyle: {
+                            backgroundColor: 'transparent',
+                            elevation: 0
+                        },
+                        headerTintColor: 'black',
+                        headerLeft: () => (
+                            <TouchableOpacity style={{ marginLeft: 10 }}>
+                                <MaterialIcons name="menu" size={32} color="black" />
+                            </TouchableOpacity>
+                        ),
+                        headerRight: () => (
+                            <TouchableOpacity style={styles.rigntIcon}>
+                                <MaterialIcons name="gps-fixed" size={25} color="black" />
+                            </TouchableOpacity>
+                        ),
+                        headerTransparent: true,
+                    }}
+                />
+                <Stack.Screen
+                    name="PaymentMethod"
+                    component={PaymentMethodScreen}
+                    options={{
+                        title: 'Payment Method',
+                        headerStyle: {
+                            backgroundColor: primaryColor,
+                            elevation: 0
+                        },
+                        headerTintColor: 'white',
                     }}
                 />
             </Stack.Navigator>

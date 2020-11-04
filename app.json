@@ -1,15 +1,14 @@
 {
   "expo": {
-    "name": "joyrush",
+    "name": "Joyrush",
     "slug": "joyrush",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "primaryColor":"#6FDA45",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#fffff"
+      "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -26,8 +25,9 @@
     },
     "android": {
       "package": "com.joyrush",
+      "enableDangerousExperimentalLeanBuilds": true,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "config": {

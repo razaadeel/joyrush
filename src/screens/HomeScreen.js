@@ -14,7 +14,7 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            {/* <Map /> */}
+            <Map />
             <TouchableOpacity
                 style={styles.subView}
                 activeOpacity={1}

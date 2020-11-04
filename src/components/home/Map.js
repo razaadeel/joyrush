@@ -36,8 +36,8 @@ const Map = () => {
                 }}
                 region={location}
                 provider={PROVIDER_GOOGLE}
-                showsUserLocation
-                followsUserLocation
+                // showsUserLocation
+                // followsUserLocation
             />
         </View>
     )

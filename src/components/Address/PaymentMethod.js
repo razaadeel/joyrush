@@ -1,20 +1,23 @@
 import React from 'react';
 import {
     StyleSheet, Text,
-    View,
+    View, TouchableOpacity
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { primaryColor } from '../../theme/colors';
 
-const PaymentMethod = () => {
+const PaymentMethod = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={{ fontSize: 16 }}>Selected Payment:</Text>
-            <View style={styles.changeView}>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('PaymentMethod')}
+                style={styles.changeView}
+            >
                 <Text style={styles.primaryTxt}>WALLET</Text>
                 <Text style={styles.secondaryTxt}>CHANGE</Text>
                 <MaterialIcons name='keyboard-arrow-right' size={25} />
-            </View>
+            </TouchableOpacity>
         </View>
     )
 }

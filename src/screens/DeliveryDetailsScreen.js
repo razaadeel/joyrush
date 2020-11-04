@@ -12,7 +12,7 @@ import Note from '../components/Address/Note';
 import PaymentMethod from '../components/Address/PaymentMethod';
 import Button from '../utils/Button';
 
-const DeliveryDetailsScreen = () => {
+const DeliveryDetailsScreen = ({ navigation }) => {
 
     let [state, setState] = React.useState({
         title: '',
@@ -51,10 +51,10 @@ const DeliveryDetailsScreen = () => {
                 name='note'
                 onChange={onChange}
             />
-            <PaymentMethod />
+            <PaymentMethod navigation={navigation} />
             <Button
                 title='Confirm Order'
-                onPress={() => console.log('pressed')}
+                onPress={() => navigation.navigate('CarType')}
                 marginTop={30}
             />
         </View>
