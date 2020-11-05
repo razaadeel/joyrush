@@ -9,10 +9,31 @@ import PickAddressScreen from '../screens/PickAddressScreen';
 import DeliveryDetailsScreen from '../screens/DeliveryDetailsScreen';
 import CarTypeScreen from '../screens/CarTypeScreen';
 import PaymentMethodScreen from '../screens/PaymentMethodScreen';
+import TrackDriverScreen from '../screens/TrackDriverScreen';
+
 import { primaryColor } from '../theme/colors';
 
 let Stack = createStackNavigator();
 
+let transparentHeader = {
+    title: '',
+    headerStyle: {
+        backgroundColor: 'transparent',
+        elevation: 0
+    },
+    headerTintColor: 'black',
+    headerLeft: () => (
+        <TouchableOpacity style={{ marginLeft: 10 }}>
+            <MaterialIcons name="menu" size={32} color="black" />
+        </TouchableOpacity>
+    ),
+    headerRight: () => (
+        <TouchableOpacity style={styles.rigntIcon}>
+            <MaterialIcons name="gps-fixed" size={25} color="black" />
+        </TouchableOpacity>
+    ),
+    headerTransparent: true,
+}
 const Navigation = () => {
 
     const HomeStack = () => {
@@ -21,25 +42,7 @@ const Navigation = () => {
                 <Stack.Screen
                     name="Home"
                     component={HomeScreen}
-                    options={{
-                        title: '',
-                        headerStyle: {
-                            backgroundColor: 'transparent',
-                            elevation: 0
-                        },
-                        headerTintColor: 'black',
-                        headerLeft: () => (
-                            <TouchableOpacity style={{ marginLeft: 10 }}>
-                                <MaterialIcons name="menu" size={32} color="black" />
-                            </TouchableOpacity>
-                        ),
-                        headerRight: () => (
-                            <TouchableOpacity style={styles.rigntIcon}>
-                                <MaterialIcons name="gps-fixed" size={25} color="black" />
-                            </TouchableOpacity>
-                        ),
-                        headerTransparent: true,
-                    }}
+                    options={transparentHeader}
                 />
                 <Stack.Screen
                     name="Address"
@@ -68,25 +71,7 @@ const Navigation = () => {
                 <Stack.Screen
                     name="CarType"
                     component={CarTypeScreen}
-                    options={{
-                        title: '',
-                        headerStyle: {
-                            backgroundColor: 'transparent',
-                            elevation: 0
-                        },
-                        headerTintColor: 'black',
-                        headerLeft: () => (
-                            <TouchableOpacity style={{ marginLeft: 10 }}>
-                                <MaterialIcons name="menu" size={32} color="black" />
-                            </TouchableOpacity>
-                        ),
-                        headerRight: () => (
-                            <TouchableOpacity style={styles.rigntIcon}>
-                                <MaterialIcons name="gps-fixed" size={25} color="black" />
-                            </TouchableOpacity>
-                        ),
-                        headerTransparent: true,
-                    }}
+                    options={transparentHeader}
                 />
                 <Stack.Screen
                     name="PaymentMethod"
@@ -99,6 +84,11 @@ const Navigation = () => {
                         },
                         headerTintColor: 'white',
                     }}
+                />
+                <Stack.Screen
+                    name="TrackDriver"
+                    component={TrackDriverScreen}
+                    options={transparentHeader}
                 />
             </Stack.Navigator>
         )
@@ -122,7 +112,7 @@ let styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 100,
         padding: 2,
-        elevation: 2,
+        elevation: 5,
     }
 })
 

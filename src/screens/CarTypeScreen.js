@@ -7,7 +7,7 @@ import { primaryColor } from '../theme/colors';
 import Map from '../components/home/Map';
 import Button from '../utils/Button';
 
-const CarTypeScreen = () => {
+const CarTypeScreen = ({ navigation }) => {
 
     let data = [
         {
@@ -69,8 +69,10 @@ const CarTypeScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Map />
-            <View>
+            <View style={{ flex: 1 }}>
+                <Map />
+            </View>
+            <View style={{ flex: 1 }}>
                 <FlatList
                     data={data}
                     renderItem={({ item }) => <Item item={item} />}
@@ -79,8 +81,9 @@ const CarTypeScreen = () => {
             </View>
             <Button
                 title='Next >>'
-                onPress={() => alert('pressed')}
+                onPress={() => navigation.navigate('TrackDriver')}
                 marginTop={10}
+
             />
         </View>
     )

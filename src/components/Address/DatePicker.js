@@ -6,7 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { lightgray, primaryColor } from '../../theme/colors';
 
 const DatePicker = ({ name, onChange }) => {
-    let [date, setDate] = React.useState(new Date());
+    let [date, setDate] = React.useState();
     let [show, setShow] = React.useState(false);
 
     const showDatePicker = () => {
@@ -19,7 +19,7 @@ const DatePicker = ({ name, onChange }) => {
 
     const handleConfirm = (date) => {
         setDate(date);
-        hideDatePicker();
+        setShow(false);
     };
 
     return (
@@ -27,7 +27,14 @@ const DatePicker = ({ name, onChange }) => {
             onPress={showDatePicker}
             activeOpacity={1}
             style={styles.container}>
-            <Text style={styles.text}>Pick a delivery data and time</Text>
+            <Text style={styles.text}>
+                {
+                    date ?
+                        date.toDateString()
+                        :
+                        'Pick a delivery data and time'
+                }
+            </Text>
             <MaterialIcons name="perm-contact-calendar" size={30} />
             <DateTimePickerModal
                 isVisible={show}
