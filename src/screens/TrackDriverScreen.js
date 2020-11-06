@@ -1,30 +1,23 @@
 import React from 'react';
 import {
     StyleSheet, Text,
-    View, ScrollView
+    View, TouchableOpacity
 } from 'react-native';
 
 import Map from '../components/home/Map';
-import DeliveryTracking from '../components/trackDriver/DeliveryTracking';
-import PackageInfo from '../components/trackDriver/PackageInfo';
-import Button from '../utils/Button';
+import { red, lightgray } from '../theme/colors';
 
-const TrackDriverScreen = () => {
+const TrackDriverScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <View style={{ height: 300 }}>
-                <Map />
-            </View>
-            <ScrollView contentContainerStyle={styles.trackView}>
-                <DeliveryTracking />
-                <PackageInfo />
-                <Button
-                    title='TRACK DRIVER'
-                    onPress={() => alert('track driver')}
-
-                />
-            </ScrollView>
-        </View >
+            <Map />
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.goBack()}
+            >
+                <Text style={styles.buttonTxt}>BACK TO TIMELINE</Text>
+            </TouchableOpacity>
+        </View>
     )
 }
 
@@ -32,11 +25,23 @@ const TrackDriverScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
     },
-    trackView: {
-        paddingLeft: 10,
-        paddingTop: 20
+    button: {
+        position: 'absolute',
+        bottom: 10,
+        alignSelf: 'center',
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 10,
+        backgroundColor: 'white',
+        width: '80%',
+        borderWidth: 2,
+        borderColor: 'lightgray'
+    },
+    buttonTxt: {
+        color: red,
+        fontSize: 18
     }
 });
 

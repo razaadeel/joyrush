@@ -16,7 +16,10 @@ const RouteList = ({ navigation }) => {
                 <Text style={styles.text}>Deliveries</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate('MyWallet')}
+            >
                 <Text style={styles.text}>My Wallet</Text>
             </TouchableOpacity>
 

@@ -81,7 +81,7 @@ const CarTypeScreen = ({ navigation }) => {
             </View>
             <Button
                 title='Next >>'
-                onPress={() => navigation.navigate('TrackDriver')}
+                onPress={() => navigation.navigate('DeliveryTimeline')}
                 marginTop={10}
 
             />

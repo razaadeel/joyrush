@@ -9,9 +9,11 @@ import PickAddressScreen from '../screens/PickAddressScreen';
 import DeliveryDetailsScreen from '../screens/DeliveryDetailsScreen';
 import CarTypeScreen from '../screens/CarTypeScreen';
 import PaymentMethodScreen from '../screens/PaymentMethodScreen';
-import TrackDriverScreen from '../screens/TrackDriverScreen';
+import DeliveryTimelineScreen from '../screens/DeliveryTimelineScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import TripDetailsScreen from '../screens/TripDetailsScreen';
+import TrackDriverScreen from '../screens/TrackDriverScreen';
+import MyWalletScreen from '../screens/MyWalletScreen';
 
 //Drawer components 
 import DrawerContent from '../components/drawer/DrawerContent';
@@ -102,6 +104,11 @@ const Navigation = () => {
                     options={() => PrimaryHeader('Payment Method')}
                 />
                 <Stack.Screen
+                    name="DeliveryTimeline"
+                    component={DeliveryTimelineScreen}
+                    options={() => transparentHeader(navigation)}
+                />
+                <Stack.Screen
                     name="TrackDriver"
                     component={TrackDriverScreen}
                     options={() => transparentHeader(navigation)}
@@ -138,6 +145,27 @@ const Navigation = () => {
             </Stack.Navigator>
         )
     }
+    const WalletStack = ({ navigation }) => {
+        return (
+            <Stack.Navigator>
+                <Stack.Screen
+                    name='MyWallet'
+                    component={MyWalletScreen}
+                    options={{
+                        ...PrimaryHeader('My Wallet'),
+                        headerLeft: ({ tintColor }) => (
+                            <TouchableOpacity
+                                style={{ marginLeft: 10 }}
+                                onPress={() => navigation.goBack()}
+                            >
+                                <MaterialIcons name="arrow-back" size={24} color={tintColor} />
+                            </TouchableOpacity>
+                        ),
+                    }}
+                />
+            </Stack.Navigator>
+        )
+    }
 
     const AppDrawer = () => {
         return (
@@ -151,6 +179,10 @@ const Navigation = () => {
                 <Drawer.Screen
                     name='MyOrders'
                     component={OrderStack}
+                />
+                <Drawer.Screen
+                    name='MyWallet'
+                    component={WalletStack}
                 />
             </Drawer.Navigator>
         )

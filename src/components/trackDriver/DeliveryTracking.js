@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { primaryColor, lightgray } from '../../theme/colors';
+import { primaryColor, red } from '../../theme/colors';
 
 import Stepper from '../../utils/Stepper';
 import TrackCard from './TrackCard';
@@ -28,7 +28,7 @@ const DeliveryTracking = () => {
                     <TrackCard
                         title='Package Pickup'
                         value='Kanu St, Nakuru, Kenya'
-                        color={'#c22136'}
+                        color={red}
                     />
                 )}
             />
