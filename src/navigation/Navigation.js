@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from '../screens/HomeScreen';
 import PickAddressScreen from '../screens/PickAddressScreen';
@@ -10,12 +10,21 @@ import DeliveryDetailsScreen from '../screens/DeliveryDetailsScreen';
 import CarTypeScreen from '../screens/CarTypeScreen';
 import PaymentMethodScreen from '../screens/PaymentMethodScreen';
 import TrackDriverScreen from '../screens/TrackDriverScreen';
+import OrdersScreen from '../screens/OrdersScreen';
+import TripDetailsScreen from '../screens/TripDetailsScreen';
+
+//Drawer components 
+import DrawerContent from '../components/drawer/DrawerContent';
 
 import { primaryColor } from '../theme/colors';
+import { PrivateValueStore } from '@react-navigation/native';
 
-let Stack = createStackNavigator();
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
-let transparentHeader = {
+
+//transparent header options
+let transparentHeader = (navigation) => ({
     title: '',
     headerStyle: {
         backgroundColor: 'transparent',
@@ -23,7 +32,10 @@ let transparentHeader = {
     },
     headerTintColor: 'black',
     headerLeft: () => (
-        <TouchableOpacity style={{ marginLeft: 10 }}>
+        <TouchableOpacity
+            style={{ marginLeft: 10 }}
+            onPress={() => navigation.openDrawer()}
+        >
             <MaterialIcons name="menu" size={32} color="black" />
         </TouchableOpacity>
     ),
@@ -33,16 +45,27 @@ let transparentHeader = {
         </TouchableOpacity>
     ),
     headerTransparent: true,
-}
+});
+
+let PrimaryHeader = (title) => ({
+    title: title,
+    headerStyle: {
+        backgroundColor: primaryColor,
+        elevation: 0
+    },
+    headerTintColor: 'white',
+})
+
 const Navigation = () => {
 
-    const HomeStack = () => {
+    const HomeStack = ({ navigation }) => {
+        //navigation props from drawer to open and close drawer from header
         return (
             <Stack.Navigator>
                 <Stack.Screen
                     name="Home"
                     component={HomeScreen}
-                    options={transparentHeader}
+                    options={() => transparentHeader(navigation)}
                 />
                 <Stack.Screen
                     name="Address"
@@ -71,26 +94,65 @@ const Navigation = () => {
                 <Stack.Screen
                     name="CarType"
                     component={CarTypeScreen}
-                    options={transparentHeader}
+                    options={() => transparentHeader(navigation)}
                 />
                 <Stack.Screen
                     name="PaymentMethod"
                     component={PaymentMethodScreen}
-                    options={{
-                        title: 'Payment Method',
-                        headerStyle: {
-                            backgroundColor: primaryColor,
-                            elevation: 0
-                        },
-                        headerTintColor: 'white',
-                    }}
+                    options={() => PrimaryHeader('Payment Method')}
                 />
                 <Stack.Screen
                     name="TrackDriver"
                     component={TrackDriverScreen}
-                    options={transparentHeader}
+                    options={() => transparentHeader(navigation)}
                 />
             </Stack.Navigator>
+        )
+    }
+
+    const OrderStack = ({ navigation }) => {
+        return (
+            <Stack.Navigator>
+                <Stack.Screen
+                    name='MyOrders'
+                    component={OrdersScreen}
+                    options={{
+                        ...PrimaryHeader('My Orders'),
+                        headerLeft: ({ tintColor }) => (
+                            <TouchableOpacity
+                                style={{ marginLeft: 10 }}
+                                onPress={() => navigation.goBack()}
+                            >
+                                <MaterialIcons name="arrow-back" size={24} color={tintColor} />
+                            </TouchableOpacity>
+                        ),
+                    }}
+                />
+                <Stack.Screen
+                    name='TripDetails'
+                    component={TripDetailsScreen}
+                    options={{
+                        ...PrimaryHeader('Past Trip Details'),
+                    }}
+                />
+            </Stack.Navigator>
+        )
+    }
+
+    const AppDrawer = () => {
+        return (
+            <Drawer.Navigator
+                drawerContent={DrawerContent}
+            >
+                <Drawer.Screen
+                    name='Home'
+                    component={HomeStack}
+                />
+                <Drawer.Screen
+                    name='MyOrders'
+                    component={OrderStack}
+                />
+            </Drawer.Navigator>
         )
     }
 
@@ -100,7 +162,7 @@ const Navigation = () => {
         >
             <Stack.Screen
                 name="Home"
-                component={HomeStack}
+                component={AppDrawer}
             />
         </Stack.Navigator>
     )

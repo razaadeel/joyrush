@@ -6,7 +6,7 @@ import {
 
 import { primaryColor } from '../theme/colors';
 
-const Button = ({ title, onPress, marginTop }) => {
+const Button = ({ title, onPress, marginTop, }) => {
     return (
         <View style={{ ...styles.container, marginTop: marginTop }}>
             <Pressable

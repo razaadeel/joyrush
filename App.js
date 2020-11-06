@@ -10,8 +10,8 @@ import { primaryColor } from './src/theme/colors';
 export default function App() {
   return (
     <NavigationContainer>
+      <StatusBar style="auto" backgroundColor={primaryColor} translucent={false} />
       <Navigation />
-      <StatusBar style="auto" backgroundColor={primaryColor} />
     </NavigationContainer>
   );
 }

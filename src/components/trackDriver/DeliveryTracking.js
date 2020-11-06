@@ -1,41 +1,59 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import StepIndicator from 'react-native-step-indicator';
 
-import { primaryColor } from '../../theme/colors';
+import { primaryColor, lightgray } from '../../theme/colors';
 
-const labels = ["Cart", "Delivery Address", "Order Summary", "Payment Method", "Track"];
-const customStyles = {
-    stepIndicatorSize: 10,
-    currentStepIndicatorSize: 10,
-    separatorStrokeWidth: 2,
-    currentStepStrokeWidth: 2,
-    stepStrokeCurrentColor: primaryColor,
-    separatorFinishedColor: primaryColor,
-    separatorUnFinishedColor: '#aaaaaa',
-    stepIndicatorFinishedColor: primaryColor,
-    stepIndicatorUnFinishedColor: '#aaaaaa',
-    stepIndicatorCurrentColor: '#ffffff',
-    stepIndicatorLabelFontSize: 0,
-    currentStepIndicatorLabelFontSize: 0,
-    stepIndicatorLabelCurrentColor: '#000000',
-    stepIndicatorLabelFinishedColor: '#ffffff',
-    stepIndicatorLabelUnFinishedColor: 'rgba(255,255,255,0.5)',
-    labelColor: '#666666',
-    labelSize: 15,
-    currentStepLabelColor: '#fe7013',
-    padding: 0
-}
+import Stepper from '../../utils/Stepper';
+import TrackCard from './TrackCard';
+import DriverDetails from './DriverDetails';
+
 const DeliveryTracking = () => {
-
-    let [state, setState] = React.useState(1);
 
     return (
         <View style={styles.container}>
-            <View>
-                {/* <View style={style.circular}/>
-                <View style={}/> */}
-            </View>
+            <Stepper
+                lineColor={primaryColor}
+                dotColor={primaryColor}
+                Component={() => <Text style={styles.text}>Book Delivery</Text>}
+            />
+            <Stepper
+                lineColor={'lightgray'}
+                dotColor={primaryColor}
+                Component={DriverDetails}
+            />
+            <Stepper
+                lineColor={'lightgray'}
+                dotColor={'lightgray'}
+                Component={() => (
+                    <TrackCard
+                        title='Package Pickup'
+                        value='Kanu St, Nakuru, Kenya'
+                        color={'#c22136'}
+                    />
+                )}
+            />
+            <Stepper
+                lineColor={'lightgray'}
+                dotColor={'lightgray'}
+                Component={() => (
+                    <TrackCard
+                        title='Drop-off package'
+                        value='Bison Hotel, Mburu Gichua Road, Nakuru'
+                        color={primaryColor}
+                    />
+                )}
+            />
+            <Stepper
+                lineColor={'white'}
+                dotColor={'lightgray'}
+                Component={() => (
+                    <TrackCard
+                        title='Delivery Code'
+                        value='4024'
+                        color={primaryColor}
+                    />
+                )}
+            />
         </View>
     )
 }
@@ -44,8 +62,26 @@ const DeliveryTracking = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingLeft: 20
+        paddingLeft: 20,
+        paddingRight: 40
     },
+    progressView: {
+        paddingLeft: 20,
+        paddingBottom: 30,
+    },
+    circular: {
+        height: 10,
+        width: 10,
+        borderRadius: 5,
+        position: 'absolute',
+        left: -6,
+        top: -5
+    },
+    text: {
+        fontSize: 18,
+        color: 'gray',
+        marginTop: -15
+    }
 });
 
 export default DeliveryTracking;

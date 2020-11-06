@@ -1,19 +1,30 @@
 import React from 'react';
 import {
     StyleSheet, Text,
-    View
+    View, ScrollView
 } from 'react-native';
 
+import Map from '../components/home/Map';
 import DeliveryTracking from '../components/trackDriver/DeliveryTracking';
+import PackageInfo from '../components/trackDriver/PackageInfo';
+import Button from '../utils/Button';
 
 const TrackDriverScreen = () => {
     return (
         <View style={styles.container}>
-            <View style={{ flex: 1 }}></View>
-            <View style={{ flex: 2 }}>
-                <DeliveryTracking />
+            <View style={{ height: 300 }}>
+                <Map />
             </View>
-        </View>
+            <ScrollView contentContainerStyle={styles.trackView}>
+                <DeliveryTracking />
+                <PackageInfo />
+                <Button
+                    title='TRACK DRIVER'
+                    onPress={() => alert('track driver')}
+
+                />
+            </ScrollView>
+        </View >
     )
 }
 
@@ -21,8 +32,12 @@ const TrackDriverScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
     },
+    trackView: {
+        paddingLeft: 10,
+        paddingTop: 20
+    }
 });
 
 export default TrackDriverScreen;
