@@ -53,23 +53,25 @@ const DriverSelect = ({ name, onChange, value, showActionSheetWithOptions }) => 
             </View>
         )
     } else {
-        <View style={styles.container}>
-            <Text style={styles.text}>Favorite Driver?</Text>
+        return (
+            <View style={styles.container}>
+                <Text style={styles.text}>Favorite Driver?</Text>
 
-            <TouchableOpacity
-                style={styles.iosPickerBtn}
-                activeOpacity={1}
-                onPress={showActionSheet}
-            >
-                {
-                    !value ?
-                        <Text style={styles.text}>Select a Favoritre Driver</Text>
-                        :
-                        <Text style={styles.text}>{value}</Text>
-                }
-            </TouchableOpacity>
-            <Text style={{ fontSize: 12, color: 'gray' }}>If you have favoritre driver, we help you to locate him/her</Text>
-        </View>
+                <TouchableOpacity
+                    style={styles.iosPickerBtn}
+                    activeOpacity={1}
+                    onPress={showActionSheet}
+                >
+                    {
+                        !value ?
+                            <Text style={styles.text}>Select a Favoritre Driver</Text>
+                            :
+                            <Text style={styles.text}>{value}</Text>
+                    }
+                </TouchableOpacity>
+                <Text style={{ fontSize: 12, color: 'gray' }}>If you have favoritre driver, we help you to locate him/her</Text>
+            </View>
+        )
     }
 
 }
