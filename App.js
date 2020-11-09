@@ -3,6 +3,9 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
+//ActionSheet provider for ios, used in driver picker component
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+
 import Navigation from './src/navigation/Navigation';
 
 import { primaryColor } from './src/theme/colors';
@@ -11,7 +14,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <StatusBar style="auto" backgroundColor={primaryColor} translucent={false} />
-      <Navigation />
+
+      <ActionSheetProvider>
+        <Navigation />
+      </ActionSheetProvider>
     </NavigationContainer>
   );
 }
