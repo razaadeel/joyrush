@@ -20,8 +20,6 @@ const DeliveryDetailsScreen = ({ navigation }) => {
         note: ''
     });
 
-    console.log(state);
-
     let onChange = (name, value) => {
         setState({
             ...state,

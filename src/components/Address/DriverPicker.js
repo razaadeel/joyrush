@@ -3,7 +3,6 @@ import {
     StyleSheet, Text,
     View,
 } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
 import { Picker } from '@react-native-community/picker';
 
 import { lightgray } from '../../theme/colors';

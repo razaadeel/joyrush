@@ -25,7 +25,6 @@
     },
     "android": {
       "package": "com.joyrush",
-      "enableDangerousExperimentalLeanBuilds": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"

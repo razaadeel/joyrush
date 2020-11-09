@@ -27,7 +27,10 @@ const RouteList = ({ navigation }) => {
                 <Text style={styles.text}>Account History</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate('PaymentMethod')}
+            >
                 <Text style={styles.text}>Payment Methods</Text>
             </TouchableOpacity>
 

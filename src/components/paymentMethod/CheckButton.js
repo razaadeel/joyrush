@@ -19,6 +19,7 @@ const CheckButton = ({ value, onPress, title, name }) => {
                 value={value}
                 tintColors={{ true: primaryColor }}
                 onCheckColor={primaryColor}
+                disabled
             />
         </TouchableOpacity>
     )
