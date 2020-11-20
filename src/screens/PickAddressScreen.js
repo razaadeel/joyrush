@@ -3,32 +3,78 @@ import {
     StyleSheet, Text,
     View, TextInput
 } from 'react-native';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { connect } from 'react-redux';
 
-import Button from '../utils/Button';
+import { setLocation, getEstimateAndDistance } from '../store/actions/bookingActions';
 
 import { primaryColor, lightgray } from '../theme/colors';
+import Button from '../utils/Button';
 
-const PickAddressScreen = ({ navigation }) => {
+const PickAddressScreen = ({ navigation, setLocation, origin, destination, getEstimateAndDistance }) => {
+
+    let [loading, setLoading] = React.useState(false);
+
+    const handlePress = (type, coords, address) => {
+        let data = {
+            address,
+            latitude: coords.lat,
+            longitude: coords.lng
+        }
+        setLocation(type, data);
+    }
+
+    const handleButttonPress = () => {
+        if (origin && destination) {
+            // getEstimateAndDistance();
+            navigation.navigate('VehicleType');
+        } else {
+            alert('Pickup and Dropoff locations are required');
+        }
+    }
+
+    React.useEffect(() => {
+        // return () => {
+        //     navigation.addListner('focus', () => setLoading(false));
+        // }
+    }, [])
+
     return (
         <View style={styles.container}>
             <View style={styles.mainView}>
                 <View style={styles.inputView}>
                     <View style={{ ...styles.dot, backgroundColor: primaryColor }} />
-                    <TextInput
-                        placeholder='Address'
-                        style={styles.input}
+                    <GooglePlacesAutocomplete
+                        placeholder={origin ? origin.address : 'Pickup Location'}
+                        fetchDetails={true}
+                        onPress={(data, details = null) => handlePress('origin', details.geometry.location, data.description)}
+                        query={{
+                            key: 'AIzaSyBUnEzpbe3VEflR7dhaboImUEnjmOaCcZI',
+                            language: 'en',
+                        }}
+                        styles={{
+                            textInput: styles.input
+                        }}
                     />
                 </View>
                 <View style={styles.inputView}>
                     <View style={{ ...styles.dot }} />
-                    <TextInput
-                        placeholder='Address'
-                        style={styles.input}
+                    <GooglePlacesAutocomplete
+                        placeholder={destination ? destination.address : 'DropOff Location'}
+                        fetchDetails={true}
+                        onPress={(data, details = null) => handlePress('destination', details.geometry.location, data.description)}
+                        query={{
+                            key: 'AIzaSyBUnEzpbe3VEflR7dhaboImUEnjmOaCcZI',
+                            language: 'en',
+                        }}
+                        styles={{
+                            textInput: styles.input
+                        }}
                     />
                 </View>
             </View>
             <Button
-                onPress={() => navigation.navigate('DeliveryDetails')}
+                onPress={handleButttonPress}
                 title='Next'
                 marginTop='auto'
             />
@@ -50,7 +96,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         paddingHorizontal: 10,
-        marginTop: 10
+        marginTop: 10,
     },
     input: {
         backgroundColor: lightgray,
@@ -59,7 +105,7 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         paddingVertical: 5,
         borderRadius: 5,
-        fontSize: 16
+        fontSize: 16,
     },
     dot: {
         height: 15,
@@ -70,4 +116,9 @@ const styles = StyleSheet.create({
     }
 });
 
-export default PickAddressScreen;
+const mapStateToProps = state => ({
+    origin: state.booking.origin,
+    destination: state.booking.destination,
+});
+
+export default connect(mapStateToProps, { setLocation, getEstimateAndDistance })(PickAddressScreen);

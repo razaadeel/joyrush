@@ -7,6 +7,7 @@ import {
 
 import Map from '../components/home/Map';
 import PickUpLocation from '../components/home/PickUpLocation';
+import { red } from '../theme/colors';
 
 let isHidden = true;
 

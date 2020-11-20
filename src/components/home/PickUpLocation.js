@@ -5,16 +5,18 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { connect } from 'react-redux';
 
-const PickUpLocation = () => {
+const PickUpLocation = ({ origin }) => {
     return (
         <View style={styles.container}>
             <Text style={{ color: 'gray' }}>Welcome Fred</Text>
             <View style={styles.inputView}>
                 <TextInput
-                    placeholder='Select PickUp Point'
+                    placeholder={'Select PickUp Point'}
                     style={styles.input}
                     placeholderTextColor='black'
+                    value={origin ? origin.address : 'Select PickUp Point'}
                     editable={false}
                 />
                 <Feather name='search' color='gray' size={20} />
@@ -43,7 +45,14 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         fontSize: 16,
+        paddingTop: 2,
+        color: 'black'
+        // backgroundColor:'green'
     }
 });
 
-export default PickUpLocation;
+const mapStateToProps = state => ({
+    origin: state.booking.origin
+});
+
+export default connect(mapStateToProps)(PickUpLocation);

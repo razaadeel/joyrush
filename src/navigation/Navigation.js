@@ -7,7 +7,7 @@ import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import PickAddressScreen from '../screens/PickAddressScreen';
 import DeliveryDetailsScreen from '../screens/DeliveryDetailsScreen';
-import CarTypeScreen from '../screens/CarTypeScreen';
+import VehicleTypeScreen from '../screens/VehicleTypeScreen';
 import PaymentMethodScreen from '../screens/PaymentMethodScreen';
 import DeliveryTimelineScreen from '../screens/DeliveryTimelineScreen';
 import OrdersScreen from '../screens/OrdersScreen';
@@ -94,8 +94,8 @@ const Navigation = () => {
                     }}
                 />
                 <Stack.Screen
-                    name="CarType"
-                    component={CarTypeScreen}
+                    name="VehicleType"
+                    component={VehicleTypeScreen}
                     options={() => transparentHeader(navigation)}
                 />
                 <Stack.Screen

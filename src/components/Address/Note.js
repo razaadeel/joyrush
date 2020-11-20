@@ -14,6 +14,7 @@ const Note = ({ value, name, onChange }) => {
                 textAlignVertical='top'
                 value={value}
                 onChangeText={val => onChange(name, val)}
+                returnKeyType='done'
             />
         </View>
     )

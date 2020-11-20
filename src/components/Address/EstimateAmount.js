@@ -1,11 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const EstimateAmount = ({ }) => {
+const EstimateAmount = ({estimatedPrice }) => {
     return (
         <View style={styles.container}>
             <Text style={{ ...styles.text, fontSize: 22 }}>Estimate:</Text>
-            <Text style={{ ...styles.text, fontSize: 30 }}>KES 4235.67</Text>
+            <Text style={{ ...styles.text, fontSize: 30 }}>USD {estimatedPrice}</Text>
         </View>
     )
 }

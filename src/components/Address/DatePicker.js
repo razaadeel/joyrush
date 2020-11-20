@@ -20,6 +20,7 @@ const DatePicker = ({ name, onChange }) => {
     const handleConfirm = (date) => {
         setDate(date);
         setShow(false);
+        onChange(name, new Date(date).toDateString())
     };
 
     return (
