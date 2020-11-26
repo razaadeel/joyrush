@@ -10,6 +10,12 @@ import Map from '../components/home/Map';
 import Button from '../utils/Button';
 import Loading from '../utils/Loading';
 
+let images = {
+    Car: require('../../assets/Car.png'),
+    Lorry: require('../../assets/Lorry.png'),
+    Bike: require('../../assets/Bike.png'),
+}
+
 const VehicleTypeScreen = ({
     navigation, origin,
     destination, distance,
@@ -18,11 +24,6 @@ const VehicleTypeScreen = ({
 }) => {
 
     const Item = ({ item }) => {
-        let images = {
-            Car: require('../../assets/Car.png'),
-            Lorry: require('../../assets/Lorry.png'),
-            Bike: require('../../assets/Bike.png'),
-        }
         return (
             <TouchableOpacity
                 style={{

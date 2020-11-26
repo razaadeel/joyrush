@@ -4,10 +4,11 @@ import {
     View, Image,
     TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import { lightgray } from '../../theme/colors';
 
-const DrawerHeader = () => {
+const DrawerHeader = ({ user }) => {
     return (
         <TouchableOpacity style={styles.container}>
             <Image
@@ -15,8 +16,8 @@ const DrawerHeader = () => {
                 style={{ height: 60, width: 60 }}
             />
             <View style={styles.detailView}>
-                <Text style={styles.name}>ٖFred Mundia</Text>
-                <Text style={styles.email}>abc@email.com</Text>
+                <Text style={styles.name}>ٖ{user.name}</Text>
+                <Text style={styles.email}>{user.email}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -45,4 +46,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default DrawerHeader;
+const mapStateToProps = state => ({
+    user: state.profile.user
+})
+
+export default connect(mapStateToProps)(DrawerHeader);

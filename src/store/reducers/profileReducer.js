@@ -1,9 +1,10 @@
-import { LOGIN, LOGOUT } from '../types';
+import { LOGIN, LOGOUT, SET_MY_BOOKINGS } from '../types';
 
 let initialState = {
     user: null,
     isAuthenticated: false,
-    loading: true
+    loading: true,
+    myBookings: []
 }
 
 export default function (state = initialState, { type, payload }) {
@@ -22,6 +23,11 @@ export default function (state = initialState, { type, payload }) {
                 user: null,
                 isAuthenticated: false,
                 loading: false
+            }
+        case SET_MY_BOOKINGS:
+            return {
+                ...state,
+                myBookings: payload
             }
         default:
             return state

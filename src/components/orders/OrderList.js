@@ -6,12 +6,12 @@ import {
 
 import OrderItem from './OrderItem';
 
-const OrderList = () => {
+const OrderList = ({ bookings }) => {
     return (
         <View>
             <FlatList
-                data={[1, 2,]}
-                renderItem={() => <OrderItem />}
+                data={bookings}
+                renderItem={({ item }) => <OrderItem item={item} />}
                 keyExtractor={(item, index) => index.toString()}
             />
         </View>

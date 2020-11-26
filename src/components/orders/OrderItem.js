@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { primaryColor, lightgray } from '../../theme/colors';
 
-const OrderItem = () => {
+const OrderItem = ({ item }) => {
     let navigation = useNavigation();
     return (
         <TouchableOpacity
@@ -19,10 +19,10 @@ const OrderItem = () => {
         >
             <View style={styles.leftView}>
                 <Text style={styles.title}>Address</Text>
-                <Text style={styles.address1}>Kanu St, Nakuru, Kenya</Text>
-                <Text style={styles.address2}>Bison Hotel, Mburu Road, Nakuru</Text>
-                <Text style={styles.date}>{new Date().toDateString()}</Text>
-                <Text style={{ color: primaryColor }}>Completed</Text>
+                <Text style={styles.address1} numberOfLines={1}>{item.origin.address}</Text>
+                <Text style={styles.address2} numberOfLines={1}>{item.destination.address}</Text>
+                <Text style={styles.date}>{new Date(item.createdAt).toDateString()}</Text>
+                {/* <Text style={{ color: primaryColor }}>Completed</Text> */}
 
                 <View style={styles.footer}>
                     <Image
@@ -31,8 +31,8 @@ const OrderItem = () => {
                     />
                     <Text style={{ color: 'lightgray', flex: 1 }}>Booking Id: 123456</Text>
                     <View>
-                        <Text>KES 200.00</Text>
-                        <Text style={{ color: 'lightgray' }}>Motorbike</Text>
+                        <Text>USD {item.estimatedPrice}</Text>
+                        <Text style={{ color: 'lightgray' }}>{item.bookingType.name}</Text>
                     </View>
                 </View>
             </View>

@@ -33,12 +33,6 @@ const PickAddressScreen = ({ navigation, setLocation, origin, destination, getEs
         }
     }
 
-    React.useEffect(() => {
-        // return () => {
-        //     navigation.addListner('focus', () => setLoading(false));
-        // }
-    }, [])
-
     return (
         <View style={styles.container}>
             <View style={styles.mainView}>

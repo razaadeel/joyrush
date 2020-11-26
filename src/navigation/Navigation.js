@@ -3,7 +3,9 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
 
+import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
 import PickAddressScreen from '../screens/PickAddressScreen';
 import DeliveryDetailsScreen from '../screens/DeliveryDetailsScreen';
@@ -19,7 +21,6 @@ import MyWalletScreen from '../screens/MyWalletScreen';
 import DrawerContent from '../components/drawer/DrawerContent';
 
 import { primaryColor } from '../theme/colors';
-import { PrivateValueStore } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -58,7 +59,18 @@ let PrimaryHeader = (title) => ({
     headerTintColor: 'white',
 })
 
-const Navigation = () => {
+const Navigation = ({ isAuthenticated }) => {
+
+    const AuthStack = ({ }) => {
+        return (
+            <Stack.Navigator headerMode='none'>
+                <Stack.Screen
+                    name='Login'
+                    component={LoginScreen}
+                />
+            </Stack.Navigator>
+        )
+    }
 
     const HomeStack = ({ navigation }) => {
         //navigation props from drawer to open and close drawer from header
@@ -192,10 +204,19 @@ const Navigation = () => {
         <Stack.Navigator
             screenOptions={{ headerShown: false }}
         >
-            <Stack.Screen
-                name="Home"
-                component={AppDrawer}
-            />
+            {
+                isAuthenticated ?
+                    <Stack.Screen
+                        name="Home"
+                        component={AppDrawer}
+                    />
+                    :
+                    <Stack.Screen
+                        name='Auth'
+                        component={AuthStack}
+                    />
+
+            }
         </Stack.Navigator>
     )
 }
@@ -208,7 +229,10 @@ let styles = StyleSheet.create({
         padding: 2,
         elevation: 5,
     }
+});
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.profile.isAuthenticated
 })
 
-
-export default Navigation;
+export default connect(mapStateToProps)(Navigation);

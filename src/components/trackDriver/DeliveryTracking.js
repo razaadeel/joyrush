@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux';
 
 import { primaryColor, red } from '../../theme/colors';
 
@@ -7,7 +8,7 @@ import Stepper from '../../utils/Stepper';
 import TrackCard from './TrackCard';
 import DriverDetails from './DriverDetails';
 
-const DeliveryTracking = () => {
+const DeliveryTracking = ({ pickup, dropoff }) => {
 
     return (
         <View style={styles.container}>
@@ -27,7 +28,7 @@ const DeliveryTracking = () => {
                 Component={() => (
                     <TrackCard
                         title='Package Pickup'
-                        value='Kanu St, Nakuru, Kenya'
+                        value={pickup}
                         color={red}
                     />
                 )}
@@ -38,7 +39,7 @@ const DeliveryTracking = () => {
                 Component={() => (
                     <TrackCard
                         title='Drop-off package'
-                        value='Bison Hotel, Mburu Gichua Road, Nakuru'
+                        value={dropoff}
                         color={primaryColor}
                     />
                 )}
@@ -84,4 +85,9 @@ const styles = StyleSheet.create({
     }
 });
 
-export default DeliveryTracking;
+const mapStateToProps = state => ({
+    pickup: state.booking.origin.address,
+    dropoff: state.booking.destination.address,
+});
+
+export default connect(mapStateToProps)(DeliveryTracking);

@@ -1,4 +1,4 @@
-import { SET_ORIGIN, SET_DESTINATION, SET_DISTANCE_DURATION, SET_VEHICLE_TYPES, SET_BOOKING_TYPE } from '../types';
+import { SET_ORIGIN, SET_DESTINATION, SET_DISTANCE_DURATION, SET_VEHICLE_TYPES, SET_BOOKING_TYPE, CONFIRM_LOADING } from '../types';
 
 let initialState = {
     origin: null,
@@ -7,7 +7,8 @@ let initialState = {
     duration: 0,
     bookingType: null,
     estimatedPrice: null,
-    vehicleTypes: []
+    vehicleTypes: [],
+    confirmLoading: false
 }
 
 export default function (state = initialState, { type, payload }) {
@@ -40,6 +41,11 @@ export default function (state = initialState, { type, payload }) {
                 ...state,
                 bookingType: payload.id,
                 estimatedPrice: payload.estimatedPrice
+            }
+        case CONFIRM_LOADING:
+            return {
+                ...state,
+                confirmLoading: !state.confirmLoading
             }
         default:
             return state

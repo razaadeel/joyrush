@@ -15,7 +15,7 @@ import Note from '../components/Address/Note';
 import PaymentMethod from '../components/Address/PaymentMethod';
 import Button from '../utils/Button';
 
-const DeliveryDetailsScreen = ({ navigation, estimatedPrice, saveBooking }) => {
+const DeliveryDetailsScreen = ({ navigation, estimatedPrice, saveBooking, confirmLoading }) => {
 
     let [state, setState] = React.useState({
         title: '',
@@ -34,8 +34,7 @@ const DeliveryDetailsScreen = ({ navigation, estimatedPrice, saveBooking }) => {
     const handlePress = () => {
         let { title, driver, date } = state;
         if (title && driver && date) {
-            saveBooking(state);
-            // navigation.navigate('DeliveryTimeline');
+            saveBooking(state, navigation);
         } else {
             alert('Please Enter all required fields');
         }
@@ -69,6 +68,7 @@ const DeliveryDetailsScreen = ({ navigation, estimatedPrice, saveBooking }) => {
                 title='Confirm Order'
                 onPress={handlePress}
                 marginTop={30}
+                loading={confirmLoading}
             />
         </View>
     )
@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    estimatedPrice: state.booking.estimatedPrice
+    estimatedPrice: state.booking.estimatedPrice,
+    confirmLoading: state.booking.confirmLoading
 })
 
 export default connect(mapStateToProps, { saveBooking })(DeliveryDetailsScreen);

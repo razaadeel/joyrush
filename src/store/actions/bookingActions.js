@@ -1,6 +1,6 @@
 import { api } from '../../services/api';
 import axios from 'axios';
-import { SET_ORIGIN, SET_DESTINATION, SET_DISTANCE_DURATION, SET_VEHICLE_TYPES, SET_BOOKING_TYPE } from '../types';
+import { SET_ORIGIN, SET_DESTINATION, SET_DISTANCE_DURATION, SET_VEHICLE_TYPES, SET_BOOKING_TYPE, CONFIRM_LOADING } from '../types';
 
 export const getPlaceDetails = (latitude, longitude) => async dispatch => {
     try {
@@ -65,8 +65,9 @@ export const setBookingType = (id, estimatedPrice) => dispatch => {
     });
 }
 
-export const saveBooking = (bookingData) => async (dispatch, getState) => {
+export const saveBooking = (bookingData, navigation) => async (dispatch, getState) => {
     try {
+        dispatch({ type: CONFIRM_LOADING });
         let userId = '5fb0dffa270ad031f4f4b8f8';
         let booking = getState().booking;
         let body = {
@@ -80,8 +81,10 @@ export const saveBooking = (bookingData) => async (dispatch, getState) => {
             details: bookingData
         }
         let res = await api.post('/booking/save_booking', body);
-        alert('Booking Saved Successfully')
+        dispatch({ type: CONFIRM_LOADING });
+        navigation.navigate('DeliveryTimeline');
     } catch (error) {
+        dispatch({ type: CONFIRM_LOADING });
         console.log(error);
     }
 }
