@@ -3,14 +3,18 @@ import {
     StyleSheet, Text,
     View, TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import Map from '../components/home/Map';
 import { red, lightgray } from '../theme/colors';
 
-const TrackDriverScreen = ({ navigation }) => {
+const TrackDriverScreen = ({ navigation, pickup, dropoff }) => {
     return (
         <View style={styles.container}>
-            <Map />
+            <Map
+                origin={pickup}
+                destination={dropoff}
+            />
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => navigation.goBack()}
@@ -45,4 +49,9 @@ const styles = StyleSheet.create({
     }
 });
 
-export default TrackDriverScreen;
+const mapStateToProps = state => ({
+    pickup: state.booking.origin,
+    dropoff: state.booking.destination,
+});
+
+export default connect(mapStateToProps)(TrackDriverScreen);

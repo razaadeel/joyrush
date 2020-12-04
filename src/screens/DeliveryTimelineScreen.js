@@ -3,17 +3,21 @@ import {
     StyleSheet, Text,
     View, ScrollView
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import Map from '../components/home/Map';
 import DeliveryTracking from '../components/trackDriver/DeliveryTracking';
 import PackageInfo from '../components/trackDriver/PackageInfo';
 import Button from '../utils/Button';
 
-const DeliveryTimeline = ({ navigation }) => {
+const DeliveryTimeline = ({ navigation, pickup, dropoff }) => {
     return (
         <View style={styles.container}>
             <View style={{ height: 300 }}>
-                <Map />
+                <Map
+                    origin={pickup}
+                    destination={dropoff}
+                />
             </View>
             <ScrollView contentContainerStyle={styles.trackView}>
                 <DeliveryTracking />
@@ -40,4 +44,9 @@ const styles = StyleSheet.create({
     }
 });
 
-export default DeliveryTimeline;
+const mapStateToProps = state => ({
+    pickup: state.booking.origin,
+    dropoff: state.booking.destination,
+});
+
+export default connect(mapStateToProps)(DeliveryTimeline);
